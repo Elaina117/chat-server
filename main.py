@@ -19,10 +19,9 @@ async def handler(websocket, path):
         await notify_user_list()
 
         async for message in websocket:
-            print(f"[MESSAGE] {message}", flush=True)
+            print(f"[CHAT] {message}", flush=True)
             for client in clients:
-                if client != websocket:
-                    await client.send(message)
+                await client.send(message)
 
     except websockets.exceptions.ConnectionClosedError as e:
         print(f"[DISCONNECT] クライアント切断: {e}", flush=True)
